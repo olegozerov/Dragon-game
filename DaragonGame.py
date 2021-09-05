@@ -6,6 +6,7 @@ class Hiroes:
     weapon - оружие
     shield - щит
     magic - магия
+    (на будующее)
     """
     def __init__(self, hp, defence, strong, weapon, shield, magic):
         self.hp = hp
@@ -32,4 +33,3 @@ class Knights(Hiroes):
         self.weapon = weapon
         self.shield = shield
 
-        
