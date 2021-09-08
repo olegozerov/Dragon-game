@@ -1,20 +1,14 @@
 class Hiroes:
-    """
-    hp - жизненная энергия, запас здоровья
-    defence - защита
-    srong - сила
-    weapon - оружие
-    shield - щит
-    magic - магия
-    (на будующее)
-    """
+
+    """Тут мы плодим наших героев"""
+
     def __init__(self, hp, defence, strong, weapon, shield, magic):
-        self.hp = hp
-        self.defence = defence
-        self.strong = strong
-        self.weapon = weapon
-        self.shield = shield
-        self.magic = magic
+        self.hp = hp                #  hp - жизненная энергия, запас здоровья
+        self.defence = defence      #  defence - защита
+        self.strong = strong        #  srong - сила
+        self.weapon = weapon        #  weapon - оружие
+        self.shield = shield        #  shield - щит
+        self.magic = magic          #  magic - магия
 
 
 class Dragon(Hiroes):
@@ -33,3 +27,11 @@ class Knights(Hiroes):
         self.weapon = weapon
         self.shield = shield
 
+
+
+class DragonGame:
+
+    """Здесь происходит сражение"""
+    
+    while True:
+        pass
