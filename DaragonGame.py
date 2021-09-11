@@ -43,7 +43,7 @@ class Dragon(Hiroes):
                        weapon = {self._weapon}\n"
 
                 
-class Knights(Hiroes):
+class Knight(Hiroes):
 
     """Рыцарь обладает следующими характреистиками: hp, defence, strong, weapon, shield"""
 
@@ -60,27 +60,50 @@ class Knights(Hiroes):
                        strong = {self._strong}\n \
                        weapon = {self._weapon}\n \
                        shield = {self._shield}\n"
-  
-        
+
+
+class Damage():
+
+    """Описаны методы насенного урона в зависомости от персонажа игры"""
+
+    dragon = Dragon()
+    knight = Knight()
+
+    def knight_damage(self):
+        if random.random() < 0.75:
+            self.damage = self.knight.hit() - self.dragon._defence
+            self.dragon._hp -= self.damage
+            print(f"\nДракон получил {self.damage} едениц урона \n")
+            print(self.dragon)
+        else:
+            print(f"\nРыцарь не смог нанести урон дракону \n")
+            print(self.dragon)
+
+    def dragon_damage(self):
+        if random.random() < 0.50:
+            self.damage = self.dragon.hit() - self.knight._defence
+            self.knight._hp -= self.damage
+            print(f"\nРыцарь получил {self.damage} едениц урона \n") 
+            print(self.knight)
+        else:
+            print(f"\nДракон не смог нанести урон рыцарю \n")
+            print(self.knight)
+
+
+
 class DragonGame:
 
     """Здесь происходит сражение"""
 
-    dragon = Dragon()
-    knights = Knights()
-
-    def knight_damage(self):
-        if random.random() < 0.75:
-            self.damage = self.knights.hit() - self.dragon._defence
-            self.dragon._hp -= self.damage
-            print(f"\nДракон получил {self.damage} едениц урона \n") 
-   
-        
-
-    def dragon_damage(self):
-        pass
+    while True:
+        break    
 
 
-d = DragonGame()
+
+
+d = Damage()
 
 d.knight_damage()
+d.dragon_damage()
+print(d.dragon)
+print(d.knight)
