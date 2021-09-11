@@ -1,7 +1,7 @@
 import random
 
 
-class Hiroes:
+class Hiro:
 
     """Тут мы плодим наших героев"""
 
@@ -12,21 +12,17 @@ class Hiroes:
         self._weapon = weapon        #  weapon - оружие
         self._shield = shield        #  shield - щит
 
-
-    def modify_health(self, parametr):
-        if self._hp > 0:
-            if parametr > 0:
-                self._hp += parametr
-                return self._hp
-            else:
-                self._hp += parametr
-                return self._hp
+    def health_tracking(self):
+        if self._hp < 0:
+            self._hp = 0
+            return self._hp
+        else:
+            return self._hp
 
     def hit(self):
         return self._strong + self._weapon
 
-
-class Dragon(Hiroes):
+class Dragon(Hiro):
 
     """Дракон обладает следующими характреистиками: hp, defence, strong, weapon"""
 
@@ -43,7 +39,7 @@ class Dragon(Hiroes):
                        weapon = {self._weapon}\n"
 
                 
-class Knight(Hiroes):
+class Knight(Hiro):
 
     """Рыцарь обладает следующими характреистиками: hp, defence, strong, weapon, shield"""
 
@@ -73,27 +69,28 @@ class Damage():
         if random.random() < 0.75:
             self.damage = self.knight.hit() - self.dragon._defence
             self.dragon._hp -= self.damage
-            print(f"\nДракон получил {self.damage} едениц урона \n")
-            print(self.dragon)
+            print(f"\nРыцарь нанес удар и дракон получил {self.damage} единиц урона")
+            print(f"И теперь у дракона осталось {self.dragon.health_tracking()} единиц здоровья \n")
         else:
-            print(f"\nРыцарь не смог нанести урон дракону \n")
-            print(self.dragon)
+            print(f"\nРыцарь не смог попасть и нанести урон дракону")
+            print(f"У дракона все еще {self.dragon.health_tracking()} единиц здоровья \n")
 
     def dragon_damage(self):
         if random.random() < 0.50:
             self.damage = self.dragon.hit() - self.knight._defence
             self.knight._hp -= self.damage
-            print(f"\nРыцарь получил {self.damage} едениц урона \n") 
-            print(self.knight)
+            print(f"\nДракон нанес удар и рыцарь получил {self.damage} единиц урона") 
+            print(f"И теперь у рыцаря осталось {self.knight.health_tracking()} единиц здоровья \n")
         else:
-            print(f"\nДракон проспал свой ход \n")
-            print(self.knight)
-
+            print(f"\nДракон проспал свой ход")
+            print(f"У рыцаря все еще {self.knight.health_tracking()} единиц здоровья \n")
 
 
 class DragonGame:
 
     """Здесь происходит сражение"""
+
+    damage = Damage()
 
     while True:
         break    
@@ -103,7 +100,7 @@ class DragonGame:
 
 d = Damage()
 
-d.knight_damage()
 d.dragon_damage()
-print(d.dragon)
-print(d.knight)
+d.knight
+d.dragon_damage()
+d.knight
