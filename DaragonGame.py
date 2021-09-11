@@ -86,7 +86,7 @@ class Damage():
             print(f"\nРыцарь получил {self.damage} едениц урона \n") 
             print(self.knight)
         else:
-            print(f"\nДракон не смог нанести урон рыцарю \n")
+            print(f"\nДракон проспал свой ход \n")
             print(self.knight)
 
 
