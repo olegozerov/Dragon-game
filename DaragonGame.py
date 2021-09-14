@@ -45,12 +45,17 @@ class Dragon(Hiro):
                        strong = {self._strong}\n \
                        weapon = {self._weapon}\n"
 
+    def fire_ball():
+        pass
+
     def __repr__(self):
         return f"{'Дракон'}"
                 
 class Knight(Hiro):
 
     """Рыцарь обладает следующими характреистиками: hp, defence, strong, weapon, shield"""
+
+    HAS_SHIELD = False
 
     def __init__(self, hp=70, defence=100, strong=120, weapon=250, shield=150):
         self._hp = hp                #  hp - жизненная энергия, запас здоровья
@@ -60,19 +65,24 @@ class Knight(Hiro):
         self._shield = shield        #  shield - щит
 
     def equip_shield(self):
-        if self._defence <= 100:
+        if Knight.HAS_SHIELD == False:
             self._defence += self._shield
-            print("\nРыцарь надел свой щит \n")
+            print(f"\nРыцарь надел свой щит, его защита теперь {self._defence} единиц \n")
+            Knight.HAS_SHIELD = True
+            return Knight.HAS_SHIELD
         else:
             pass
 
-
     def remove_shield(self):
-        if self._defence > 100:
-            self._defence -= self._shield
-            print("\nРыцарь снял свой щит \n")
-        else: 
-            pass
+        if self._hp > 0:
+            if Knight.HAS_SHIELD == True:
+                self._defence -= self._shield
+                print(f"\nРыцарь снял свой щит, его защита теперь {self._defence} единиц \n")
+                Knight.HAS_SHIELD = False
+                return Knight.HAS_SHIELD
+            else:
+                pass
+
 
     def pass_move(self):
         pass
@@ -96,10 +106,10 @@ class Damage():
 
     def knight_damage(self):
         if self.knight._hp > 0:
-            if random.random() < 0.75:
+            if random.random() <= 0.75:
                 self.damage = self.knight.hit() - self.dragon._defence
                 self.dragon._hp -= self.damage
-                print(f"\nРыцарь нанес удар и дракон получил {abs(self.damage)} единиц урона")
+                print(f"\nРыцарь нанес удар и дракон получил {self.damage} единиц урона")
                 print(f"И теперь у дракона осталось {self.dragon.health_tracking()} единиц здоровья \n")
                 self.dragon.hiroe_lose()
             else:
@@ -109,12 +119,15 @@ class Damage():
 
     def dragon_damage(self):
         if self.dragon._hp > 0:
-            if random.random() < 0.50:
-                self.damage = self.dragon.hit() - self.knight._defence
-                self.knight._hp -= self.damage
-                print(f"\nДракон нанес удар и рыцарь получил {abs(self.damage)} единиц урона") 
-                print(f"И теперь у рыцаря осталось {self.knight.health_tracking()} единиц здоровья \n")
-                self.knight.hiroe_lose()
+            if random.random() <= 0.50:
+                if self.dragon.hit() > self.knight._defence:
+                    self.damage = self.dragon.hit() - self.knight._defence
+                    self.knight._hp -= self.damage
+                    print(f"\nДракон нанес удар и рыцарь получил {self.damage} единиц урона") 
+                    print(f"И теперь у рыцаря осталось {self.knight.health_tracking()} единиц здоровья \n")
+                    self.knight.hiroe_lose()
+                else:
+                    print(f"\nДракон нанес удар рыцарю, но не смог нанести урон. Рыцарь был под щитом") 
             else:
                 print(f"\nДракон проспал свой ход")
                 print(f"У рыцаря все еще {self.knight.health_tracking()} единиц здоровья \n")
@@ -127,21 +140,25 @@ class DragonGame:
     damage = Damage()
   
     while True:
-        
-        action = input("Пожалуйста введите действие героя: attack, pass, defence \n")
-
+        action = input("Пожалуйста введите действие рыцаря: attack, pass, defence \n")
         if action == "attack":
-            damage.knight.remove_shield
-            if damage.dragon._hp > 0:
+            if damage.dragon._hp > 0: 
                 damage.knight_damage()
+                if damage.dragon._hp == 0:
+                    break
             else:
                 break
         elif action == "pass":
             damage.knight.pass_move()
         elif action == "defence":
             damage.knight.equip_shield()
+        
+        
         if damage.knight._hp > 0:
-            damage.dragon_damage() 
+            damage.dragon_damage()
+            damage.knight.remove_shield()
+            if damage.knight._hp == 0:
+                break
         else:
             break
         
