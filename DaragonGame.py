@@ -54,7 +54,7 @@ class Knight(Hiro):
  
     HAS_SHIELD = False
  
-    def __init__(self, hp=400, defence=100, strong=120, weapon=250, shield=150, potion=(2, 500)):
+    def __init__(self, hp=400, defence=100, strong=120, weapon=250, shield=150, potion=[2, 500]):
         self._hp = hp                                           #  hp - жизненная энергия, запас здоровья
         self._defence = defence                                 #  defence - защита
         self._strong = strong                                   #  srong - сила
@@ -89,7 +89,9 @@ class Knight(Hiro):
             self._hp += self._potion_portion
             return self._hp
         else:
-            print('Бутылочки с зельем закончились')
+            print("\nБутылочки с зельем закончились \n")
+            print("Выбирете другое действие рыцаря \n")
+
   
     def __str__(self):
         return f"Характеристики дракона: hp = {self._hp}\n \
@@ -97,7 +99,8 @@ class Knight(Hiro):
                        strong = {self._strong}\n \
                        weapon = {self._weapon}\n \
                        shield = {self._shield}\n \
-                       potion = {self._potion}\n"
+                       potion_butle = {self._potion_butle}\n \
+                       potion_portion = {self._potion_portion}\n"
  
     def __repr__(self):
         return f"{'Рыцарь'}"
@@ -105,6 +108,7 @@ class Knight(Hiro):
 class Damage():
  
     """Описаны методы настенного урона в зависимости от персонажа игры"""
+    
     LOOP_ = True
 
     dragon = Dragon()
@@ -175,13 +179,13 @@ class DragonGame:
     damage = Damage()
  
     while damage.LOOP_:
-        action = input("Пожалуйста введите действие рыцаря: attack, pass, defence, potion\n")
+        action = input("Пожалуйста введите действие рыцаря: attack, pass, defence, potion, infoD, infoK\n")
         
         if action == "attack":
             damage.knight_attack()
             damage.dragon_attack()
         elif action == "pass":
-            pass
+            print("\nРыцарь пропускает ход \n")
             damage.dragon_attack()
         elif action == "defence":
             damage.knight.equip_shield()
@@ -189,19 +193,11 @@ class DragonGame:
         elif action == "potion":
             damage.knight.get_potion()
             damage.dragon_attack()
+        elif action == "infoD":
+            print(damage.dragon)
+        elif action == "infoK":
+            print(damage.knight)
         else:
-            print("\nТаклй комманды нет попробуйте снова \n")  
+            print("\nТакой команды нет, попробуйте снова \n")  
  
 d = Damage()
- 
-"""d.dragon_damage()
-d.knight
-d.dragon_damage()
-d.knight
-print(d.knight)"""
- 
-"""d.knight_damage()
-d.dragon
-d.knight_damage()
-d.dragon
-print(d.dragon)"""
