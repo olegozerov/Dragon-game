@@ -179,7 +179,7 @@ class DragonGame:
     damage = Damage()
  
     while damage.LOOP_:
-        action = input("Пожалуйста введите действие рыцаря: attack, pass, defence, potion, infoD, infoK\n")
+        action = input("Пожалуйста введите действие рыцаря: attack, pass, defence, potion, infoD, infoK ==> ").lower()
         
         if action == "attack":
             damage.knight_attack()
