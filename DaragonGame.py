@@ -105,9 +105,11 @@ class Knight(Hiro):
 class Damage():
  
     """Описаны методы настенного урона в зависимости от персонажа игры"""
- 
+    LOOP_ = True
+
     dragon = Dragon()
     knight = Knight()
+    
  
     def dragon_damage_whith_fire_ball(self):
         if self.knight.HAS_SHIELD == False:
@@ -138,6 +140,15 @@ class Damage():
                 print(f"\nДракон проспал свой ход")
                 print(f"У рыцаря все еще {self.knight.health_tracking()} единиц здоровья \n")
  
+    def dragon_attack(self):
+        if self.knight._hp > 0:
+            self.dragon_damage()
+            self.knight.remove_shield()
+            if self.knight._hp == 0:
+                Damage.LOOP_ = False
+        else:
+            Damage.LOOP_ = False
+
     def knight_damage(self):
         if self.knight._hp > 0:
             if random.random() <= 0.75:
@@ -148,40 +159,38 @@ class Damage():
             else:
                 print(f"\nРыцарь не смог попасть и нанести урон дракону")
                 print(f"У дракона все еще {self.dragon.health_tracking()} единиц здоровья \n")
+
+    def knight_attack(self):
+        if self.dragon._hp > 0: 
+            self.knight_damage()
+            if self.dragon._hp == 0:
+                Damage.LOOP_ = False
+        else:
+            Damage.LOOP_ = False
  
 class DragonGame:
  
     """Здесь происходит сражение"""
  
     damage = Damage()
-
  
-    while True:
+    while damage.LOOP_:
         action = input("Пожалуйста введите действие рыцаря: attack, pass, defence, potion\n")
         
         if action == "attack":
-            if damage.dragon._hp > 0: 
-                damage.knight_damage()
-                if damage.dragon._hp == 0:
-                    break
-            else:
-                break
+            damage.knight_attack()
+            damage.dragon_attack()
         elif action == "pass":
             pass
+            damage.dragon_attack()
         elif action == "defence":
             damage.knight.equip_shield()
+            damage.dragon_attack()
         elif action == "potion":
             damage.knight.get_potion()
-            
- 
-        if damage.knight._hp > 0:
-            damage.dragon_damage()
-            damage.knight.remove_shield()
-            if damage.knight._hp == 0:
-                break
+            damage.dragon_attack()
         else:
-            break
-        
+            print("\nТаклй комманды нет попробуйте снова \n")  
  
 d = Damage()
  
