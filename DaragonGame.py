@@ -58,7 +58,7 @@ class Knight(Hero):
  
     HAS_SHIELD = False
  
-    def __init__(self, hp=400, defence=100, strong=120, weapon=250, shield=150, potion=[2, 500]):
+    def __init__(self, hp=400, defence=100, strong=120, weapon=250, shield=150, potion=(2, 500)):
         self._hp = hp                                           #  hp - жизненная энергия, запас здоровья
         self._defence = defence                                 #  defence - защита
         self._strong = strong                                   #  srong - сила
@@ -230,7 +230,7 @@ class DragonGame:
             damage.knight_attack()
             damage.dragon_attack()
         elif action == "pass":
-            print(pass_)
+            print(pass_round)
             print("+" + "-" * 150 + "+")
             print("Рыцарь пропускает ход ")
             print("+" + "-" * 150 + "+")
