@@ -217,9 +217,11 @@ class DragonGame:
     print(start_game)
     print(damage.knight)
     print(damage.dragon)
-    
+    counter = 1
  
     while damage.LOOP_:
+        print("\n\n+" + "-" * 72 + "ROUND"+f"{counter}" + "-" * 72 + "+\n\n")
+        counter += 1
         print("+" + "-" * 150 + "+")
         action = input("Пожалуйста введите действие рыцаря: stop, attack, pass, defence, potion, info ==> ").lower()
         print("+" + "-" * 150 + "+")
