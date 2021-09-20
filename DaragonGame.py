@@ -17,8 +17,7 @@ class Hero:
         if self._hp < 0:
             self._hp = 0
             return self._hp
-        else:
-            return self._hp
+        return self._hp
  
     def hiroe_lose(self):
         """We display a message about the death of one of the heroes"""
@@ -69,7 +68,7 @@ class Knight(Hero):
  
     def equip_shield(self):
         """The use of a shield, the hero's defense increases by the number of shield units"""
-        if Knight.HAS_SHIELD == False:
+        if Knight.HAS_SHIELD is False:
             self._defence += self._shield
             Knight.HAS_SHIELD = True
             print(knight_shield)
@@ -77,34 +76,31 @@ class Knight(Hero):
             print(f"The knight has put on his shield, his defense is now {self._defence} units")
             print("+" + "-" * 150 + "+")
             return Knight.HAS_SHIELD
-        else:
-            pass
+        pass
  
     def remove_shield(self):
         """Removing the shield, the hero's defense is reduced by the number of shield units"""
         if self._hp > 0:
-            if Knight.HAS_SHIELD == True:
+            if Knight.HAS_SHIELD is True:
                 self._defence -= self._shield
                 Knight.HAS_SHIELD = False
                 return Knight.HAS_SHIELD
-            else:
-                pass
+            pass
  
     def get_potion(self):
         """Applying a knight's hp increasing potion"""
         if self._potion_butle > 0:
             self._potion_butle -= 1
+            self._hp += self._potion_portion
             print(bottle)
             print("+" + "-" * 150 + "+")
             print(f"The knight drank the potion and his health increased by {self._potion_portion} units")
             print(f"Potion bottles left {self._potion_butle}")
             print("+" + "-" * 150 + "+")
-            self._hp += self._potion_portion
             return self._hp
-        else:
-            print("+" + "-" * 150 + "+")
-            print("\nIt was a mistake! Potion bottles are out \n")
-            print("+" + "-" * 150 + "+")
+        print("+" + "-" * 150 + "+")
+        print("\nIt was a mistake! Potion bottles are out \n")
+        print("+" + "-" * 150 + "+")
 
   
     def __str__(self):
@@ -126,7 +122,7 @@ class Damage():
     knight = Knight()   
  
     def dragon_damage_whith_fire_ball(self):
-        if self.knight.HAS_SHIELD == False:
+        if self.knight.HAS_SHIELD is False:
             self.knight._hp -= self.dragon.fire_ball()
             print(dragon_att_fire)
             print("+" + "-" * 150 + "+")
