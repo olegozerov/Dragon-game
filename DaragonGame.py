@@ -1,5 +1,5 @@
 import random
-from imageACS import *
+from imageACS import death, start_game, knight_shield, dragon_att_fire, dragon_sleep, knight_att, dragon_att, bottle, fack, pass_round
  
 class Hero:
     """Here we breed our heroes"""
@@ -239,5 +239,3 @@ class DragonGame:
             print("+" + "-" * 150 + "+")  
  
 d = Damage()
-
-
