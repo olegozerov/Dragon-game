@@ -76,7 +76,6 @@ class Knight(Hero):
             print(f"The knight has put on his shield, his defense is now {self._defence} units")
             print("+" + "-" * 150 + "+")
             return Knight.HAS_SHIELD
-        pass
  
     def remove_shield(self):
         """Removing the shield, the hero's defense is reduced by the number of shield units"""
@@ -85,8 +84,7 @@ class Knight(Hero):
                 self._defence -= self._shield
                 Knight.HAS_SHIELD = False
                 return Knight.HAS_SHIELD
-            pass
- 
+    
     def get_potion(self):
         """Applying a knight's hp increasing potion"""
         if self._potion_butle > 0:
