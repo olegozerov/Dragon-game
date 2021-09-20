@@ -100,7 +100,6 @@ class Knight(Hero):
         print("\nIt was a mistake! Potion bottles are out \n")
         print("+" + "-" * 150 + "+")
 
-  
     def __str__(self):
         return f"Dragon characteristics: hp = {self._hp}\n \
                        defence = {self._defence}\n \
@@ -134,7 +133,6 @@ class Damage():
             print(f"The dragon spewed fire, but was unable to deal damage. The knight was under the shield")
             print("+" + "-" * 150 + "+")
 
- 
     def dragon_damage_whithout_fire_ball(self):
         if self.dragon.hit() > self.knight._defence:
             self.knight._hp -= self.dragon.hit() - self.knight._defence
@@ -150,7 +148,6 @@ class Damage():
             print(f"The dragon stabbed the knight, but was unable to inflict damage. The knight was under the shield")
             print("+" + "-" * 150 + "+")
 
-    
     def dragon_damage(self):
         if self.dragon._hp > 0:
             if random.random() <= 0.50:
