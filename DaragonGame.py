@@ -196,6 +196,9 @@ class Damage():
                 Damage.LOOP = False
         else:
             Damage.LOOP = False
+
+    def show_line_whit_hp_hiroes(self):
+        print("\n+" + "DRAGON hp - " + f"{self.dragon._hp}" + "-" * 120 + f"{self.knight._hp}" + " - hp KNIGHT" + "+\n")
  
 class DragonGame:
     """There's a battle going on here"""
@@ -210,7 +213,7 @@ class DragonGame:
         print("\n\n+" + "-" * 72 + "ROUND"+f"{counter}" + "-" * 72 + "+\n\n")
         counter += 1
         print("+" + "-" * 150 + "+")
-        print("\n+" + "DRAGON hp - " + f"{damage.dragon._hp}" + "-" * 120 + f"{damage.knight._hp}" + " - hp KNIGHT" + "+\n")
+        damage.show_line_whit_hp_hiroes()
         action = input("Please enter a knight action: stop, attack, pass, defence, potion, info ==> ").lower()
         print("+" + "-" * 150 + "+")
         if action == "attack":
