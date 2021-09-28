@@ -1,7 +1,7 @@
 from image_ACS import start_game, pass_round
 from heroes_damage import Damage
 
-"""There's a battle going on here"""
+#There's a battle going on here
 damage = Damage()
 print("\n+" + "-" * 64 + "DRAGONGAME" + "-" * 64 + "+")
 print(start_game)
@@ -41,4 +41,3 @@ while damage.LOOP:
         print("There is no such command, try again ")
         print("+" + "-" * 150 + "+")  
  
-
